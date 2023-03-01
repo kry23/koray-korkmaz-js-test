@@ -6,5 +6,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h3 class="title">Book Title</h3>
+    <input type="text" class="input" />
+    <button class="btn">Save</button>
+  </body>
+  <script>
+    let booksArr = [];
+
+    let saveBtn = document.querySelector(".btn");
+    let title = document.querySelector(".title");
+    let input = document.querySelector(".input");
+
+    const savedBooks = localStorage.getItem("books");
+    if (savedBooks) {
+      booksArr = JSON.parse(savedBooks);
+    }
+
+    function saveBook() {
+      title.innerText = input.value;
+      booksArr.push(input.value);
+      localStorage.setItem("books", JSON.stringify(booksArr));
+      input.value = "";
+      console.log(JSON.parse(localStorage.getItem("books")));
+    }
+
+    saveBtn.addEventListener("click", saveBook);
+  </script>
 </html>
